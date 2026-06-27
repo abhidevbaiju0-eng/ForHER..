@@ -1,0 +1,873 @@
+:root {
+    --primary: #f43f5e;
+    --primary-hover: #e11d48;
+    --bg-dark: #0f172a;
+    --bg-panel: rgba(30, 41, 59, 0.7);
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --card-border: rgba(255,255,255,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* SETUP SCREEN (LANDING) */
+.setup-bg {
+    background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.hero {
+    text-align: center;
+}
+
+.logo {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+.logo i {
+    color: var(--primary);
+    margin-right: 10px;
+}
+.logo span {
+    color: var(--primary);
+}
+
+/* Ludo Launch Button on Landing */
+.ludo-launch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+.ludo-launch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(168, 85, 247, 0.55);
+}
+.ludo-launch-btn i {
+    font-size: 1.2rem;
+    animation: diceSpin 3s ease-in-out infinite;
+}
+@keyframes diceSpin {
+    0%, 80%, 100% { transform: rotate(0deg); }
+    90% { transform: rotate(360deg); }
+}
+
+/* Heartbeat animation for logo icon */
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.2); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    56% { transform: scale(1); }
+}
+
+.heartbeat-icon {
+    display: inline-block;
+    animation: heartbeat 1.8s ease-in-out infinite;
+    color: var(--primary);
+    filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.6));
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.glass-card {
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.platform-card {
+    background: rgba(0,0,0,0.3);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.platform-card:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.platform-card.active {
+    background: rgba(244, 63, 94, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.platform-card i {
+    font-size: 1.8rem;
+}
+
+.platform-card span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: var(--text-muted);
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    background: rgba(0,0,0,0.3);
+    color: var(--text);
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.file-upload-wrapper {
+    width: 100%;
+}
+.file-upload-wrapper input[type="file"] {
+    display: none;
+}
+.file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px dashed rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+.file-label:hover {
+    border-color: var(--primary);
+    background: rgba(244, 63, 94, 0.05);
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.primary-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(225, 29, 72, 0.4);
+}
+
+.loading-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1.2rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.guest-msg {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+.warning-text {
+    font-size: 0.85rem;
+    color: #fbbf24;
+    margin-bottom: 10px;
+}
+
+/* PLAYER SCREEN */
+#player-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    /* Default: column layout (portrait) */
+    flex-direction: column;
+}
+
+#video-container {
+    /* KEY FIX: flex:1 means it takes ALL available space.
+       When chat is hidden, that's 100%. When chat is visible, 
+       the chat's fixed size is subtracted and video gets the rest. */
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    position: relative;
+    background: #000;
+}
+#video-container.video-fullscreen {
+    /* Absolute forcing destruction of any black fractional borders */
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    outline: none;
+}
+
+#youtube-player {
+    width: 100%;
+    height: 100%;
+}
+
+/* TAP OVERLAY — invisible layer to intercept taps for show/hide controls */
+#tap-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background: transparent;
+    cursor: pointer;
+    display: none;
+}
+
+.room-info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.badge-content {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    padding: 8px 12px 8px 16px;
+    border-radius: 30px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.badge-content span {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+#copy-invite-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+#copy-invite-btn:hover {
+    background: var(--primary-hover);
+}
+
+/* TOP VIDEO CONTROLS BAR */
+.video-controls-top {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Controls hidden state (animated) */
+.video-controls-top.controls-hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+.video-controls-top .control-btn {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.video-controls-top .control-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+}
+
+.video-controls-top .control-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Room Info Badge Close Button */
+.close-badge-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.2s;
+    margin-left: 5px;
+    flex-shrink: 0;
+}
+
+.close-badge-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.close-badge-btn i {
+    font-size: 0.8rem;
+}
+
+/* Room info badge hidden state (animated) */
+.room-info.controls-hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Responsive adjustment for mobile controls */
+@media screen and (max-width: 580px) {
+    .video-controls-top {
+        top: 15px;
+        right: 15px;
+        gap: 6px;
+    }
+    .video-controls-top .control-btn span {
+        display: none; /* Hide text on small screens, keeping only icons */
+    }
+    .video-controls-top .control-btn {
+        padding: 0;
+        width: 38px;
+        height: 38px;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    .room-info {
+        top: 15px;
+        left: 15px;
+        max-width: calc(100% - 150px);
+    }
+    .badge-content {
+        padding: 6px 8px 6px 12px;
+        gap: 8px;
+    }
+    .badge-content span {
+        font-size: 0.8rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    #copy-invite-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+    #copy-invite-btn span {
+        display: none;
+    }
+}
+
+/* ===== CHAT PANEL ===== */
+#chat-container {
+    background: var(--bg-panel);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent children from overflowing the 25% boundary */
+    border-left: 1px solid var(--card-border);
+}
+
+.chat-header {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--card-border);
+    flex-shrink: 0;
+}
+
+.chat-header h3 {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.close-btn {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+.close-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 8px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 0; /* Critical: allows flex shrinking */
+}
+
+.message {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 12px;
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    max-width: 85%;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    word-break: break-word;
+}
+
+.message.self {
+    background: var(--primary);
+    align-self: flex-end;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 4px;
+}
+
+.message.system {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    align-self: center;
+    text-align: center;
+    padding: 4px;
+}
+
+/* ===== CHAT INPUT AREA ===== */
+.chat-input-area {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Does NOT grow — only takes exactly how much space its children need */
+    border-top: 1px solid var(--card-border);
+    background: rgba(15, 23, 42, 0.95);
+}
+
+.chat-text-section {
+    flex-shrink: 0;
+}
+
+#chat-form {
+    display: flex;
+    gap: 6px;
+    padding: 6px 8px;
+    align-items: center;
+}
+
+.custom-chat-input {
+    flex-grow: 1;
+    border-radius: 18px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--card-border);
+    padding: 8px 14px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    min-height: 36px;
+    max-height: 36px;
+    overflow-y: hidden;
+    outline: none;
+    word-break: break-word;
+    cursor: text;
+    -webkit-user-select: text;
+    user-select: text;
+    -webkit-user-modify: read-write;
+    caret-color: var(--primary);
+}
+
+.custom-chat-input:empty:before {
+    content: attr(placeholder);
+    color: rgba(255,255,255,0.4);
+    pointer-events: none;
+}
+.custom-chat-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.15);
+}
+
+.send-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.15s;
+}
+.send-btn:active {
+    transform: scale(0.92);
+    background: var(--primary-hover);
+}
+
+/* ===== CUSTOM ON-SCREEN KEYBOARD ===== */
+.custom-keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    padding: 2.5px 2px;
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.99));
+    border-top: 1px solid rgba(255,255,255,0.06);
+    flex: 0 0 auto;
+    height: 220px;
+}
+
+.kb-row {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    flex: 1;
+    min-height: 0;
+}
+
+.kb-key {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: none;
+    border-radius: 4px; /* Slightly softer corners for condensed fit */
+    font-family: 'Outfit', sans-serif;
+    font-size: min(16px, 3vh); /* Scales font naturally inside shrinking rows */
+    font-weight: 500;
+    min-width: 20px;
+    height: 100%; /* Height takes exactly the percentage of the responsive row */
+    padding: 0 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s, transform 0.08s;
+    flex: 1;
+    max-width: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.kb-key:active {
+    background: var(--primary);
+    transform: scale(0.92);
+}
+
+.kb-key.wide {
+    flex: 1.5;
+    max-width: 55px;
+    font-size: 12px;
+}
+
+.kb-key.extra-wide {
+    flex: 5;
+    max-width: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.kb-key.action-key {
+    background: rgba(244, 63, 94, 0.2);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.kb-key.action-key:active {
+    background: var(--primary);
+    color: #fff;
+}
+
+.kb-key.shift-key,
+.kb-key.backspace-key {
+    flex: 1.4;
+    max-width: 50px;
+}
+
+.kb-key.backspace-key i,
+.kb-key.shift-key i {
+    font-size: 13px;
+}
+
+.kb-key.emoji-key {
+    font-size: 16px;
+    flex: 1;
+    max-width: 38px;
+}
+
+/* Emoji Panel */
+.emoji-panel {
+    display: none;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 4px;
+    max-height: 80px;
+    overflow-y: auto;
+    background: rgba(15, 23, 42, 0.98);
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.emoji-panel.active {
+    display: flex;
+}
+
+.emoji-btn {
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: background 0.15s;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.emoji-btn:active {
+    background: rgba(255,255,255,0.15);
+}
+
+/* ===== RESPONSIVE LAYOUTS ===== */
+
+/* Portrait Mode (Mobile vertical) */
+@media screen and (orientation: portrait) {
+    #player-screen {
+        flex-direction: column;
+    }
+
+    /* 
+     * Video gets flex:1 (already set above), so it fills ALL remaining space.
+     * Chat gets a FIXED 25vh. Video auto-gets 75vh.
+     * When chat is hidden (display:none), video naturally fills 100%.
+     */
+    #chat-container {
+        flex: 0 0 min(45vh, 300px);
+        height: min(45vh, 300px);
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+}
+
+/* Landscape Mode (Mobile horizontal) */
+@media screen and (orientation: landscape) {
+    #player-screen {
+        flex-direction: row;
+    }
+
+    /* Chat gets a fixed 30vw. Video auto-gets 70vw via flex:1. */
+    #chat-container {
+        flex: 0 0 30vw;
+        width: 30vw;
+        height: 100%;
+        border-top: none;
+        border-left: 1px solid rgba(255,255,255,0.1);
+    }
+}
+
+ / *   R e c o n n e c t i o n   O v e r l a y   S t y l e s   * / 
+ . r e c o n n e c t - o v e r l a y   { 
+         p o s i t i o n :   a b s o l u t e ; 
+         t o p :   0 ;   l e f t :   0 ;   r i g h t :   0 ;   b o t t o m :   0 ; 
+         b a c k g r o u n d :   r g b a ( 1 5 ,   2 3 ,   4 2 ,   0 . 8 5 ) ; 
+         b a c k d r o p - f i l t e r :   b l u r ( 8 p x ) ; 
+         - w e b k i t - b a c k d r o p - f i l t e r :   b l u r ( 8 p x ) ; 
+         z - i n d e x :   1 0 0 0 0 ; 
+         d i s p l a y :   f l e x ; 
+         j u s t i f y - c o n t e n t :   c e n t e r ; 
+         a l i g n - i t e m s :   c e n t e r ; 
+ } 
+ . r e c o n n e c t - o v e r l a y . h i d d e n   { 
+         d i s p l a y :   n o n e ; 
+ } 
+ . r e c o n n e c t - c a r d   { 
+         b a c k g r o u n d :   r g b a ( 2 5 5 ,   2 5 5 ,   2 5 5 ,   0 . 1 ) ; 
+         b o r d e r :   1 p x   s o l i d   r g b a ( 2 5 5 ,   2 5 5 ,   2 5 5 ,   0 . 2 ) ; 
+         b o r d e r - r a d i u s :   2 0 p x ; 
+         p a d d i n g :   3 0 p x ; 
+         t e x t - a l i g n :   c e n t e r ; 
+         c o l o r :   w h i t e ; 
+         m a x - w i d t h :   8 0 % ; 
+         b o x - s h a d o w :   0   1 0 p x   3 0 p x   r g b a ( 0 , 0 , 0 , 0 . 5 ) ; 
+         a n i m a t i o n :   f a d e I n   0 . 3 s   e a s e ; 
+ } 
+ . r e c o n n e c t - i c o n   { 
+         f o n t - s i z e :   3 r e m ; 
+         c o l o r :   # f 4 3 f 5 e ; 
+         m a r g i n - b o t t o m :   1 5 p x ; 
+ } 
+ . r e c o n n e c t - c a r d   h 3   { 
+         m a r g i n :   0   0   1 0 p x   0 ; 
+         f o n t - s i z e :   1 . 5 r e m ; 
+         f o n t - w e i g h t :   6 0 0 ; 
+ } 
+ . r e c o n n e c t - c a r d   p   { 
+         m a r g i n :   0   0   2 0 p x   0 ; 
+         o p a c i t y :   0 . 8 ; 
+ } 
+ . r e c o n n e c t - s p i n n e r   { 
+         w i d t h :   4 0 p x ; 
+         h e i g h t :   4 0 p x ; 
+         b o r d e r :   4 p x   s o l i d   r g b a ( 2 5 5 , 2 5 5 , 2 5 5 , 0 . 2 ) ; 
+         b o r d e r - t o p - c o l o r :   # f 4 3 f 5 e ; 
+         b o r d e r - r a d i u s :   5 0 % ; 
+         m a r g i n :   0   a u t o   2 0 p x   a u t o ; 
+         a n i m a t i o n :   s p i n   1 s   l i n e a r   i n f i n i t e ; 
+ } 
+ @ k e y f r a m e s   s p i n   { 
+         t o   {   t r a n s f o r m :   r o t a t e ( 3 6 0 d e g ) ;   } 
+ } 
+  
+ 

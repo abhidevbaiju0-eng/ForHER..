@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f172a">
+    <title>ForHER..❤️</title>
+    <script defer src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="setup-screen" class="screen active setup-bg">
+        <div class="landing-container">
+            <div class="hero">
+                <h1 class="logo"><i class="fa-solid fa-heart heartbeat-icon"></i> For<span> My Love</span></h1>
+                <p class="subtitle">Watch together, feel together. ❤️</p>
+                <a href="ludo.html" class="ludo-launch-btn"><i class="fa-solid fa-dice"></i> Play Ludo Together</a>
+            </div>
+
+            <div id="loading-state" class="glass-card loading-card">
+                <i class="fa-solid fa-spinner fa-spin"></i> Connecting Your Love...
+            </div>
+
+            <div id="host-panel" class="hidden">
+                <div class="glass-card">
+                    <h3 class="card-title">Choose Platform</h3>
+                    <div class="platform-grid">
+                        <div class="platform-card active" data-type="direct">
+                            <i class="fa-solid fa-link"></i>
+                            <span>Direct Link</span>
+                        </div>
+                        <div class="platform-card" data-type="youtube">
+                            <i class="fa-brands fa-youtube"></i>
+                            <span>YouTube</span>
+                        </div>
+                        <div class="platform-card" data-type="local">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <span>Local File</span>
+                        </div>
+                    </div>
+
+                    <div class="input-section">
+                        <div id="url-input-group" class="input-wrapper">
+                            <i class="fa-solid fa-link input-icon"></i>
+                            <input type="text" id="media-url" placeholder="Paste direct URL or Google Drive link...">
+                        </div>
+                        <div id="file-input-group" class="hidden file-upload-wrapper">
+                            <label for="media-file" class="file-label">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span id="file-name-display">Choose Video File</span>
+                            </label>
+                            <input type="file" id="media-file" accept="video/mp4,video/x-m4v,video/*">
+                        </div>
+                        <button id="create-room-btn" class="primary-btn">Create Room <i
+                                class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="guest-panel" class="hidden">
+                <div class="glass-card">
+                    <h3 class="card-title">Join Party</h3>
+                    <p class="guest-msg">You have been invited to watch together! ❤️</p>
+                    <div class="input-section hidden" id="guest-file-group">
+                        <p class="warning-text"><i class="fa-solid fa-triangle-exclamation"></i> Host selected a local
+                            file. Please select the same file from your device to watch.</p>
+                        <div class="file-upload-wrapper">
+                            <label for="guest-media-file" class="file-label">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span id="guest-file-name-display">Choose Video File</span>
+                            </label>
+                            <input type="file" id="guest-media-file" accept="video/mp4,video/x-m4v,video/*">
+                        </div>
+                    </div>
+                    <button id="join-room-btn" class="primary-btn">Join Room <i
+                            class="fa-solid fa-door-open"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Player Screen -->
+    <div id="player-screen" class="screen">
+        <div id="video-container">
+            <video id="native-player" controls playsinline></video>
+            <div id="youtube-player"></div>
+
+            <div id="tap-overlay"></div>
+
+            <!-- Reconnection Overlay -->
+            <div id="reconnect-overlay" class="hidden reconnect-overlay">
+                <div class="reconnect-card">
+                    <i class="fa-solid fa-wifi fa-beat-fade reconnect-icon"></i>
+                    <h3 id="reconnect-title">Connection Lost</h3>
+                    <p id="reconnect-message">Waiting for partner...</p>
+                    <div id="reconnect-spinner" class="reconnect-spinner"></div>
+                    <button id="reconnect-cancel-btn" class="btn-secondary hidden" onclick="window.location.reload()">
+                        <i class="fa-solid fa-xmark"></i> Cancel
+                    </button>
+                </div>
+            </div>
+
+            <!-- Floating controls at the top-right of the video-container -->
+            <div class="video-controls-top" id="video-controls-top">
+                <button id="top-rotation-btn" class="control-btn hidden" title="Toggle Rotation Lock">
+                    <i class="fa-solid fa-lock-open"></i>
+                    <span>Lock Rot.</span>
+                </button>
+                <button id="copy-invite-btn" class="control-btn" title="Copy Invite Link">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copy Link</span>
+                </button>
+                <button id="top-layout-btn" class="control-btn" title="Toggle Layout">
+                    <i class="fa-solid fa-table-columns"></i>
+                    <span>Chat & Video</span>
+                </button>
+                <button id="top-fullscreen-btn" class="control-btn" title="Toggle Fullscreen">
+                    <i class="fa-solid fa-expand"></i>
+                    <span>Resize</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="chat-container" class="chat-panel hidden">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message system">Room created. Share the link with your love! ❤️</div>
+            </div>
+            <!-- Chat input area with custom keyboard — 25% text field, 75% keyboard -->
+            <div class="chat-input-area" id="chat-input-area">
+                <div class="chat-text-section">
+                    <form id="chat-form">
+                        <div id="chat-input" class="custom-chat-input" contenteditable="true"
+                            placeholder="Tap to type a message..."></div>
+                        <button type="submit" class="send-btn" aria-label="Send Message"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+                <div class="custom-keyboard" id="custom-keyboard">
+                    <div class="kb-row" id="kb-row-1"></div>
+                    <div class="kb-row" id="kb-row-2"></div>
+                    <div class="kb-row" id="kb-row-3"></div>
+                    <div class="kb-row" id="kb-row-4"></div>
+                    <div class="kb-row kb-row-space" id="kb-row-5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script defer src="app.js"></script>
+</body>
+
+</html>
